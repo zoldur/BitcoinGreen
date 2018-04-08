@@ -2,6 +2,7 @@
 
 TMP_FOLDER=$(mktemp -d)
 CONFIG_FILE='bitcoingreen.conf'
+ORIGFOLDER='/root/.bitcoingreen'
 CONFIGFOLDER="/root/.bitg-$1"
 COIN_DAEMON='bitcoingreend'
 COIN_CLI='bitcoingreen-cli'
@@ -14,6 +15,11 @@ NODEIP=$(curl -s4 icanhazip.com)
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m'
+
+function copy_folder() {
+ rsync -a $ORIGFOLDER/ $CONFIGFOLDER/
+ rm $CONFIGFOLDER/$CONFIG_FILE
+}
 
 function ask_port() {
 DEFAULT_COIN_PORT=9333
@@ -189,6 +195,7 @@ function setup_node() {
   checks
   get_ip
   check_port
+  copy_folder
   create_config
   create_key
   update_config
