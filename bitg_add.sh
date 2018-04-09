@@ -2,7 +2,7 @@
 
 TMP_FOLDER=$(mktemp -d)
 CONFIG_FILE='bitcoingreen.conf'
-ORIGFOLDER='/root/.bitcoingreen'
+ORIGFOLDER='/root/.bitg'
 CONFIGFOLDER="/root/.bitg-$1"
 COIN_DAEMON='bitcoingreend'
 COIN_CLI='bitcoingreen-cli'
@@ -18,7 +18,6 @@ NC='\033[0m'
 
 function copy_folder() {
  rsync -a $ORIGFOLDER/ $CONFIGFOLDER/
- rm $CONFIGFOLDER/$CONFIG_FILE
 }
 
 function ask_port() {
@@ -126,10 +125,10 @@ EOF
 }
 
 function create_shell() {
-  cat << EOF >/usr/local/bin/$COIN_NAME.sh
+  cat << EOF >/usr/local/bin/$COIN_NAME
 /usr/local/bin/bitcoingreen-cli -conf=$CONFIGFOLDER/$CONFIG_FILE -datadir=$CONFIGFOLDER \$@
 EOF
-chmod +x /usr/local/bin/$COIN_NAME.sh
+chmod +x /usr/local/bin/$COIN_NAME
 }
 
 function get_ip() {
