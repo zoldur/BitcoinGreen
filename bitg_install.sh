@@ -6,7 +6,7 @@ CONFIGFOLDER='/root/.bitcoingreen'
 COIN_DAEMON='bitcoingreend'
 COIN_CLI='bitcoingreen-cli'
 COIN_PATH='/usr/local/bin/'
-COIN_TGZ='https://github.com/bitcoingreen/bitcoingreen/releases/download/1.1.0/bitcoingreen-1.1.0-x86_64-linux-gnu.tar.gz'
+COIN_TGZ='https://github.com/bitcoingreen/bitcoingreen/releases/download/1.2.1/bitcoingreen-1.2.1-x86_64-linux-gnu.tar.gz'
 COIN_ZIP=$(echo $COIN_TGZ | awk -F'/' '{print $NF}')
 COIN_NAME='BitcoinGreen'
 COIN_PORT=9333
@@ -25,9 +25,9 @@ function download_node() {
   cd $TMP_FOLDER >/dev/null 2>&1
   wget -q $COIN_TGZ
   compile_error
-  tar xvzf $COIN_ZIP --strip 1 >/dev/null 2>&1
+  tar xvzf $COIN_ZIP --strip 2 >/dev/null 2>&1
   compile_error
-  cp bin/$COIN_DAEMON bin/$COIN_CLI $COIN_PATH
+  cp $COIN_DAEMON $COIN_CLI $COIN_PATH
   cd - >/dev/null 2>&1
   rm -rf $TMP_FOLDER >/dev/null 2>&1
   clear
