@@ -6,7 +6,7 @@ CONFIGFOLDER='/root/.bitcoingreen'
 COIN_DAEMON='bitcoingreend'
 COIN_CLI='bitcoingreen-cli'
 COIN_PATH='/usr/local/bin/'
-COIN_TGZ='https://github.com/bitcoingreen/bitcoingreen/releases/download/1.2.1/bitcoingreen-1.2.1-x86_64-linux-gnu.tar.gz'
+COIN_TGZ='https://github.com/bitcoingreen/bitcoingreen/releases/download/v1.3.0/bitcoingreen-1.3.0-x86_64-linux-gnu.tar.gz'
 COIN_ZIP=$(echo $COIN_TGZ | awk -F'/' '{print $NF}')
 COIN_NAME='BitcoinGreen'
 COIN_PORT=9333
@@ -118,12 +118,13 @@ function update_config() {
   sed -i 's/daemon=1/daemon=0/' $CONFIGFOLDER/$CONFIG_FILE
   cat << EOF >> $CONFIGFOLDER/$CONFIG_FILE
 logintimestamps=1
-maxconnections=256
+maxconnections=16
 #bind=$NODEIP
 masternode=1
 externalip=$NODEIP:$COIN_PORT
 masternodeprivkey=$COINKEY
 
+#Nodes
 addnode=51.15.198.252
 addnode=51.15.206.123
 addnode=51.15.66.234
